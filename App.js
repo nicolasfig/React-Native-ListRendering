@@ -2,7 +2,6 @@ import React from "react";
 import { Button, StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
 
-import Contact from "./Contact";
 import ContactsList from "./ContactsList";
 import contacts, { compareNames } from "./contacts";
 
