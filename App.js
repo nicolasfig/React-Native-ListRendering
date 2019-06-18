@@ -1,10 +1,10 @@
 import React from "react";
-import { Button, Text, SectionList, StyleSheet, View } from "react-native";
-import { Constants } from "expo";
+import { Button, StyleSheet, View } from "react-native";
+import Constants from "expo-constants";
 
 import Contact from "./Contact";
-import ContactsList from './ContactsList';
-import contacts, {compareNames} from "./contacts";
+import ContactsList from "./ContactsList";
+import contacts, { compareNames } from "./contacts";
 
 export default class App extends React.Component {
 	state = {
@@ -19,15 +19,19 @@ export default class App extends React.Component {
 	sort = () => {
 		this.setState(prevState => ({
 			contacts: [...prevState.contacts].sort(compareNames)
-		}))
-	}
+		}));
+	};
 
 	render() {
 		return (
 			<View style={styles.container}>
 				<Button title="toggle contacts" onPress={this.toggleContacts} />
-				{this.state.showContacts && <ContactsList contacts={this.state.contacts}/>}
-				{this.state.showContacts && <Button title="sort contacts" onPress={this.sort} />}
+				{this.state.showContacts && (
+					<ContactsList contacts={this.state.contacts} />
+				)}
+				{this.state.showContacts && (
+					<Button title="sort contacts" onPress={this.sort} />
+				)}
 			</View>
 		);
 	}
