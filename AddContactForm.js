@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		padding: 5,
+		margin: 5,
 		borderColor: "#000",
 		borderWidth: 1
 	}
@@ -32,23 +33,27 @@ export default class AddContactForm extends Component {
 		this.setState({ phone });
 	};
 
+	handleSubmit = () => {
+		this.props.onSubmit(this.state);
+	};
+
 	render() {
 		return (
 			<View style={styles.container}>
 				<TextInput
 					style={styles.input}
-                    placeholder="Name"
+					placeholder="Name"
 					onChangeText={this.handleNameChange}
 					value={this.state.name}
 				/>
 				<TextInput
 					style={styles.input}
-                    placeholder="Phone"
+					placeholder="Phone"
 					onChangeText={this.handlePhoneChange}
 					value={this.state.phone}
-                    keyboardType="numeric"
+					keyboardType="numeric"
 				/>
-				<Button title="Add Contact" />
+				<Button title="Submit" onPress={this.handleSubmit} />
 			</View>
 		);
 	}

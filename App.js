@@ -3,7 +3,7 @@ import { Button, StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
 
 import ContactsList from "./ContactsList";
-import AddContactForm from './AddContactForm';
+import AddContactForm from "./AddContactForm";
 import contacts, { compareNames } from "./contacts";
 
 export default class App extends React.Component {
@@ -13,9 +13,13 @@ export default class App extends React.Component {
 		contacts: contacts
 	};
 
+	addContact = newContact => {
+		this.setState(prevState => ({  showForm: false, contacts: [...prevState.contacts, newContact] }));
+	};
+
 	toggleForm = () => {
-		this.setState(prevState => ({showForm: !prevState.showForm}));
-	}
+		this.setState(prevState => ({ showForm: !prevState.showForm }));
+	};
 
 	toggleContacts = () => {
 		this.setState(prevState => ({ showContacts: !prevState.showContacts }));
@@ -28,8 +32,7 @@ export default class App extends React.Component {
 	};
 
 	render() {
-		
-		if(this.state.showForm) return <AddContactForm/>
+		if (this.state.showForm) return <AddContactForm onSubmit={this.addContact}/>;
 
 		return (
 			<View style={styles.container}>
