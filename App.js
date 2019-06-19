@@ -8,7 +8,7 @@ import contacts, { compareNames } from "./contacts";
 
 export default class App extends React.Component {
 	state = {
-		showContacts: false,
+		showContacts: true,
 		showForm: false,
 		contacts: contacts
 	};
