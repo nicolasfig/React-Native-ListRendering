@@ -63,10 +63,12 @@ export default class AddContactForm extends Component {
 	}; */
 
 	validateForm = () => {
+        const names = this.state.name.split(' ');
 		if (
 			+this.state.phone >= 0 &&
 			this.state.phone.length <= 10 &&
-			this.state.name.length >= 3
+            this.state.name.length >= 3 &&
+            names.length >= 2
 		) {
 			return this.setState({ isFormValid: true });
 		} else {
@@ -93,6 +95,7 @@ export default class AddContactForm extends Component {
 					onChangeText={this.getHandler('phone')}
 					value={this.state.phone}
 					keyboardType="numeric"
+                    maxLength={10}
 				/>
 				<Button
 					title={
