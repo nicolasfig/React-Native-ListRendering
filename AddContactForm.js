@@ -68,7 +68,7 @@ export default class AddContactForm extends Component {
 			+this.state.phone >= 0 &&
 			this.state.phone.length <= 10 &&
             this.state.name.length >= 3 &&
-            names.length >= 2
+			names.length >= 2 && names[0] && names[1]
 		) {
 			return this.setState({ isFormValid: true });
 		} else {
