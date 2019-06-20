@@ -1,50 +1,47 @@
-import Example from './example/Switch';
-export default Example;
+/* import Example from './example/Switch';
+export default Example; */
 
-/* import React from "react";
-import { Button, StyleSheet, View } from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
+import { createSwitchNavigator, createAppContainer } from "react-navigation";
 
-import ContactsList from "./ContactsList";
-import AddContactForm from "./AddContactForm";
 import contacts, { compareNames } from "./contacts";
+import AddContactScreen from "./screens/AddContactScreen";
+import ContactsListScreen from "./screens/ContactsListScreen";
+
+const MainNavigator = createSwitchNavigator(
+	{
+		AddContact: AddContactScreen,
+		ContactList: ContactsListScreen
+	},
+	{
+		initialRouteName: "ContactList"
+	}
+);
+
+const AppNavigator = createAppContainer(MainNavigator);
 
 export default class App extends React.Component {
 	state = {
-		showContacts: true,
-		showForm: false,
 		contacts: contacts
 	};
 
 	addContact = newContact => {
-		this.setState(prevState => ({  showForm: false, contacts: [...prevState.contacts, newContact] }));
-	};
-
-	toggleForm = () => {
-		this.setState(prevState => ({ showForm: !prevState.showForm }));
-	};
-
-	toggleContacts = () => {
-		this.setState(prevState => ({ showContacts: !prevState.showContacts }));
-	};
-
-	sort = () => {
 		this.setState(prevState => ({
-			contacts: [...prevState.contacts].sort(compareNames)
+			showForm: false,
+			contacts: [...prevState.contacts, newContact]
 		}));
 	};
 
 	render() {
-		if (this.state.showForm) return <AddContactForm onSubmit={this.addContact}/>;
-
 		return (
-			<View style={styles.container}>
-				<Button title="toggle contacts" onPress={this.toggleContacts} />
-				{this.state.showContacts && (
-					<ContactsList contacts={this.state.contacts} />
-				)}
-				<Button title="Add Contact" onPress={this.toggleForm} />
-			</View>
+			<AppNavigator
+				screenProps={{
+					contacts: this.state.contacts,
+					addContact: this.addContact
+				}}
+			/>
 		);
 	}
 }
@@ -56,4 +53,3 @@ const styles = StyleSheet.create({
 		paddingTop: Constants.statusBarHeight
 	}
 });
- */

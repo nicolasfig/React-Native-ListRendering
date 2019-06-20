@@ -65,7 +65,7 @@ export default class AddContactForm extends Component {
 	validateForm = () => {
         const names = this.state.name.split(' ');
 		if (
-			+this.state.phone >= 0 &&
+			+this.state.phone >= 1 &&
 			this.state.phone.length <= 10 &&
             this.state.name.length >= 3 &&
 			names.length >= 2 && names[0] && names[1]
