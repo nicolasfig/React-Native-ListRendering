@@ -1,6 +1,6 @@
-/* import Example from './example/Switch';
-export default Example; */
-
+/* import Example from './example/Stack';
+export default Example;
+ */
 import React from "react";
 import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
@@ -25,7 +25,7 @@ const AppNavigator = createAppContainer(MainNavigator);
 export default class App extends React.Component {
 	state = {
 		contacts: contacts
-	};
+	}; 
 
 	addContact = newContact => {
 		this.setState(prevState => ({
