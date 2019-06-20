@@ -1,4 +1,7 @@
-import React from "react";
+import Example from './example/Switch';
+export default Example;
+
+/* import React from "react";
 import { Button, StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
 
@@ -53,3 +56,4 @@ const styles = StyleSheet.create({
 		paddingTop: Constants.statusBarHeight
 	}
 });
+ */
