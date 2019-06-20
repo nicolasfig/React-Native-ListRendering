@@ -1,10 +1,26 @@
 import React, {Component} from 'react';
 import {Button, View, StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
 
 import ContactsList from '../ContactsList';
 
 export default class ContactsListScreen extends Component {
+
+	static navigationOptions = ({navigation}) => {
+		return {
+			headerTitle: 'Contacts',
+			headerTitleStyle: {
+				flex: 1,
+				textAlign: "center"
+			},
+			headerRight: <Button title="Add" onPress={() => {
+				navigation.navigate('AddContact')
+			}}/>,
+			 headerTitleContainerStyle: {
+				right: 0
+			},
+		}
+	}
+
 	state = {
 		showContacts: true,
 	};
@@ -23,9 +39,16 @@ export default class ContactsListScreen extends Component {
 			<View style={styles.container}>
 				<Button title="toggle contacts" onPress={this.toggleContacts} />
 				{this.state.showContacts && (
-					<ContactsList contacts={this.props.screenProps.contacts} />
+					<ContactsList 
+						contacts={this.props.screenProps.contacts} 
+						onSelectContact={(contact) => {
+							this.props.navigation.navigate('ContactDetails', {
+								name: contact.name,
+								phone: contact.phone
+							});
+						}}
+					/>
 				)}
-				<Button title="Add Contact" onPress={this.showForm} />
 			</View>
 		);
 	}
@@ -35,6 +58,5 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "#fff",
-		paddingTop: Constants.statusBarHeight
 	}
 });

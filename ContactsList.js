@@ -6,26 +6,32 @@ import Contact from "./Contact";
 
 /* item = {name: String, phone: String, key: Number}
 	same as contact => <Contact {...contact.item}/> */
-const renderItem = ({ item }) => <Contact {...item} />;
 
 const renderSectionHeader = contact => <Text>{contact.section.title}</Text>;
 
 const ContactsList = props => {
-    
-    const contactsByLetter = props.contacts.reduce((obj, contact) => {
-        const firstLetter = contact.name[0].toUpperCase();
-        return {
-            ...obj,
-            [firstLetter]: [...(obj[firstLetter] || []), contact],
-        }
-    },{}) 
+	const renderItem = ({ item }) => (
+		<Contact {...item} onSelectContact={contact => {
+            props.onSelectContact(contact);
+        }} />
+	);
 
-    const sections = Object.keys(contactsByLetter).sort().map(letter => ({
-        title: letter,
-        data: contactsByLetter[letter]
-    }))
+	const contactsByLetter = props.contacts.reduce((obj, contact) => {
+		const firstLetter = contact.name[0].toUpperCase();
+		return {
+			...obj,
+			[firstLetter]: [...(obj[firstLetter] || []), contact]
+		};
+	}, {});
 
-    return (
+	const sections = Object.keys(contactsByLetter)
+		.sort()
+		.map(letter => ({
+			title: letter,
+			data: contactsByLetter[letter]
+		}));
+
+	return (
 		<SectionList
 			renderItem={renderItem}
 			renderSectionHeader={renderSectionHeader}
