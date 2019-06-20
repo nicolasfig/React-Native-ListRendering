@@ -14,9 +14,12 @@ class ScreenComponentOne extends Component {
 					borderColor: "teal"
 				}}
 			>
-				<Button title="Go to screen two" onPress={() => {
-                    this.props.navigation.navigate('RouteNameTwo');
-                }}/>
+				<Button
+					title="Go to screen two"
+					onPress={() => {
+						this.props.navigation.navigate("RouteNameTwo");
+					}}
+				/>
 			</View>
 		);
 	}
@@ -34,9 +37,12 @@ class ScreenComponentTwo extends Component {
 					borderColor: "orange"
 				}}
 			>
-				<Button title="Go to screen one" onPress={() => {
-                    this.props.navigation.navigate('RouteNameOne');
-                }}/>
+				<Button
+					title="Go to screen one"
+					onPress={() => {
+						this.props.navigation.navigate("RouteNameOne");
+					}}
+				/>
 			</View>
 		);
 	}
