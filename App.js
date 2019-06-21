@@ -7,27 +7,55 @@ import Constants from "expo-constants";
 import {
 	createStackNavigator,
 	createAppContainer,
-	createSwitchNavigator
+	createSwitchNavigator,
+	createMaterialTopTabNavigator
 } from "react-navigation";
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 import contacts, { compareNames } from "./contacts";
 import AddContactScreen from "./screens/AddContactScreen";
 import ContactsListScreen from "./screens/ContactsListScreen";
 import ContactDetailsScreen from "./screens/ContactDetailsScreen";
 import LoginScreen from './screens/LoginScreen';
+import SettingsScreen from './screens/SettingsScreen';
 
-const MainNavigator = createStackNavigator(
+const ContactsTab = createStackNavigator(
 	{
 		AddContact: AddContactScreen,
 		ContactList: ContactsListScreen,
 		ContactDetails: ContactDetailsScreen
 	},
 	{
-		initialRouteName: "ContactList"
+		initialRouteName: "ContactList",
+		navigationOptions: {
+			headerTintColor: '#a41034'
+		}
 	}
 );
 
-const SwitcNavigator = createSwitchNavigator(
+ContactsTab.navigationOptions = {
+	tabBarIcon: ({focused, horizontal, tintColor}) => (
+		<MaterialCommunityIcons
+			name={`contacts`}
+			size={21}
+			color={tintColor}
+		/>
+	)
+}
+
+const MainNavigator = createMaterialTopTabNavigator({
+	Contacts: ContactsTab,
+	Settings: SettingsScreen
+},
+{
+	tabBarOptions: {
+		style: {
+			marginTop: Constants.statusBarHeight
+		}
+	}
+})
+
+const SwitchNavigator = createSwitchNavigator(
 	{
 		Main: MainNavigator,
 		Login: LoginScreen
@@ -37,7 +65,7 @@ const SwitcNavigator = createSwitchNavigator(
 	}
 );
 
-const AppNavigator = createAppContainer(SwitcNavigator);
+const AppNavigator = createAppContainer(SwitchNavigator);
 
 export default class App extends React.Component {
 	state = {

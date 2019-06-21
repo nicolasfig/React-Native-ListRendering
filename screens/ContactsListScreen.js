@@ -37,7 +37,7 @@ export default class ContactsListScreen extends Component {
 
 		return (
 			<View style={styles.container}>
-				<Button title="toggle contacts" onPress={this.toggleContacts} />
+				{/* <Button title="toggle contacts" onPress={this.toggleContacts} /> */}
 				{this.state.showContacts && (
 					<ContactsList 
 						contacts={this.props.screenProps.contacts} 
