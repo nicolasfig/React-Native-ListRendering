@@ -98,3 +98,6 @@ const styles = StyleSheet.create({
 		paddingTop: Constants.statusBarHeight
 	}
 });
+
+
+// TODO: Adding API to the app
