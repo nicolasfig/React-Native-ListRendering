@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
 });
 
 
-// TODO: Adding API to the app
+// TODO: external app data
