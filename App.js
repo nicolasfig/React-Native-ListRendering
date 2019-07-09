@@ -12,7 +12,7 @@ import {
 } from "react-navigation";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
-import contacts from "./contacts";
+import {fetchUsers} from './Api';
 import AddContactScreen from "./screens/AddContactScreen";
 import ContactsListScreen from "./screens/ContactsListScreen";
 import ContactDetailsScreen from "./screens/ContactDetailsScreen";
@@ -73,15 +73,11 @@ export default class App extends React.Component {
 	};
 
 	componentDidMount(){
-		this.fetchContacts();
+		this.getUsers()
 	}
 
-	fetchContacts = async () => {
-		const response = await fetch('https://randomuser.me/api/?results=50&nat=gb')
-		
-		const {results} = await response.json();
-		
-		console.log(results);
+	getUsers = async () => {
+		const results = await fetchUsers();
 		this.setState({
 			contacts: results
 		})
