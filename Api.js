@@ -1,5 +1,5 @@
 export const processContact = contact => ({
-    name: `${contact.name.first} ${contact.name.last}`,
+    name: `${contact.name.title} ${contact.name.first} ${contact.name.last}`,
     phone: contact.phone,
 })
 
