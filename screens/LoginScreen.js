@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { Button, View, StyleSheet, TextInput } from "react-native";
-
+import { Button, View, StyleSheet, TextInput, Text } from "react-native";
+import { login } from '../Api';
 export default class LoginScreen extends Component {
 	state = {
-		userName: "",
-		password: ""
+		username: "",
+		password: "",
+		error: ""
 	};
 
-	handleUserNameUpdate = userName => {
-		this.setState({ userName });
+	handleUserNameUpdate = username => {
+		this.setState({ username });
 	};
 
 	handlePasswordUpdate = password => {
@@ -18,33 +19,34 @@ export default class LoginScreen extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
+				<Text style={styles.error}>{this.state.error}</Text>
 				<TextInput
+					autoCapitalize="none"
 					placeholder="username"
 					value={this.state.userName}
 					onChangeText={this.handleUserNameUpdate}
 				/>
 				<TextInput
+					autoCapitalize="none"
 					placeholder="password"
 					value={this.state.password}
 					onChangeText={this.handlePasswordUpdate}
+					secureTextEntry
 				/>
 				<Button title="press to log in" onPress={this._login} />
 			</View>
 		);
 	}
 
-	_login = () => {
-		fetch("http://localhost:8000", {
-			method: "POST",
-			headers: { "content-type": "application/json" },
-			body: JSON.stringify({
-				username: this.state.userName,
-				password: this.state.password
-			})
-		})
-			.then(res => console.log(res))
-		this.props.navigation.navigate("Main");
-		// navigate to main navigator
+	_login = async () => {
+		try{
+			const success = await login(this.state.username, this.state.password);
+			this.props.navigation.navigate('Main');
+		}catch(error){
+			const errorMessage = error.message;
+			this.setState({ error: errorMessage	})
+		}
+
 	};
 }
 
@@ -54,6 +56,10 @@ const styles = StyleSheet.create({
 		justifyContent: "center"
 	},
 	text: {
+		textAlign: "center"
+	},
+	error: {
+		color: "#f00",
 		textAlign: "center"
 	}
 });
