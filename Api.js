@@ -26,3 +26,5 @@ export const login = async (username, password) => {
     const errorMessage = await response.text();
     throw new Error(errorMessage);
 };
+
+// TODO: implement redux
